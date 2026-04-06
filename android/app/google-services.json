@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "72874731969",
+    "project_id": "survival-english-d8c02",
+    "storage_bucket": "survival-english-d8c02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72874731969:android:97156d1b1e408765e4a740",
+        "android_client_info": {
+          "package_name": "com.example.survival_english"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72874731969-u8ca0tnsb70eckjjqujhdrppt1jlidvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy7D-t31RwD2zb7xcYWPzF0YidHKR_-Fo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72874731969-u8ca0tnsb70eckjjqujhdrppt1jlidvg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "72874731969-fv7414avoaqauoh3etpvill1vbu5hukm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.survivalEnglish"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72874731969:android:539ea3c86676df4fe4a740",
+        "android_client_info": {
+          "package_name": "com.reallanglabs.survivalenglish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72874731969-79hd34rtj6p7gre8ad09l9ibur6ko90n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reallanglabs.survivalenglish",
+            "certificate_hash": "478c4d7d9bd7e6feaf6bdce2114aa24b046a0395"
+          }
+        },
+        {
+          "client_id": "72874731969-q5a86slqr8phi9nbjksi1c0j82o1k54s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reallanglabs.survivalenglish",
+            "certificate_hash": "145f65279394cf017a203057c61dc9d5f6ef52a9"
+          }
+        },
+        {
+          "client_id": "72874731969-u8ca0tnsb70eckjjqujhdrppt1jlidvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy7D-t31RwD2zb7xcYWPzF0YidHKR_-Fo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72874731969-u8ca0tnsb70eckjjqujhdrppt1jlidvg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "72874731969-fv7414avoaqauoh3etpvill1vbu5hukm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.survivalEnglish"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

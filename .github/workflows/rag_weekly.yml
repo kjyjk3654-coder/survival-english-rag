@@ -1,0 +1,34 @@
+name: rag-weekly
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1" # every Monday 03:00 UTC
+
+jobs:
+  weekly-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r rag_factory/requirements.txt
+
+      - name: Run weekly batch
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RAG_PROVIDER: openai
+          RAG_MODEL: gpt-4o-mini
+        run: |
+          python rag_factory/weekly_batch.py

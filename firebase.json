@@ -1,0 +1,25 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "survival-english-d8c02",
+          "appId": "1:72874731969:android:97156d1b1e408765e4a740",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "survival-english-d8c02",
+          "configurations": {
+            "android": "1:72874731969:android:97156d1b1e408765e4a740",
+            "ios": "1:72874731969:ios:a43ec9c121a1ad23e4a740",
+            "macos": "1:72874731969:ios:a43ec9c121a1ad23e4a740",
+            "web": "1:72874731969:web:e6c8d284c490956de4a740",
+            "windows": "1:72874731969:web:732767afd1a0a048e4a740"
+          }
+        }
+      }
+    }
+  }
+}
