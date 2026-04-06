@@ -36,7 +36,7 @@ CHANNEL_IDS = [
 
 
 def _latest_video_urls_for_channel(channel_id: str, limit: int) -> list[str]:
-    feed_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+    feed_url = f"https://www.youtube.com/rss/channel/{channel_id}"
     res = requests.get(feed_url, timeout=25)
     if res.status_code != 200:
         raise RuntimeError(f"failed to fetch rss feed channel_id={channel_id} http={res.status_code}")
