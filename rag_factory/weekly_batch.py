@@ -36,10 +36,12 @@ CHANNEL_IDS = [
 
 
 def _latest_video_urls_for_channel(channel_id: str, limit: int) -> list[str]:
-    feed_url = f"https://www.youtube.com/rss/channel/{channel_id}"
+    feed_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
     res = requests.get(feed_url, timeout=25)
     if res.status_code != 200:
-        raise RuntimeError(f"failed to fetch rss feed channel_id={channel_id} http={res.status_code}")
+        raise RuntimeError(
+            f"failed to fetch rss feed channel_id={channel_id} http={res.status_code}"
+        )
 
     root = ET.fromstring(res.text)
     urls: list[str] = []
@@ -107,7 +109,17 @@ def main():
             raise RuntimeError("CHANNEL_IDS must include source_channel and channel_id")
 
         lang = "en"
-        video_urls = _latest_video_urls_for_channel(channel_id, limit=max(1, per_channel))
+        try:
+            video_urls = _latest_video_urls_for_channel(
+                channel_id,
+                limit=max(1, per_channel),
+            )
+        except Exception as e:
+            print(
+                f"RSS Feed Failed channel={source_channel} channel_id={channel_id} err={e}",
+                flush=True,
+            )
+            continue
 
         for url in video_urls:
             vid = _extract_video_id(url)
