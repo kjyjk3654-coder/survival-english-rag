@@ -9,46 +9,30 @@ from urllib.parse import urlparse, parse_qs
 
 import requests
 
-
-CHANNEL_HANDLES = [
-    "@gabrielsilva",
-    "@bbclearningenglish",
-    "@LearnEnglishWithTVSeries",
-    "@EnglishwithLucy",
-    "@mmmEnglish",
-    "@englishwithjennifer",
-    "@rachelsenglish",
-    "@LearnEnglishwithBobtheCanadian",
-    "@SpeakEnglishWithVanessa",
-    "@EnglishClass101",
+CHANNEL_IDS = [
+    {"source_channel": "Gabriel Silva", "channel_id": "UC6_f3A2_I9T-S_aG3_S4_TQ"},
+    {"source_channel": "BBC Learning English", "channel_id": "UCHaHD477h-FeBbVh9Sh7syA"},
+    {
+        "source_channel": "Learn English with TV Series",
+        "channel_id": "UCKgpamMlm872zkGDcBJHYDg",
+    },
+    {"source_channel": "English with Lucy", "channel_id": "UCz4tgANd4yy8Oe0iXCdSWfA"},
+    {"source_channel": "mmmEnglish", "channel_id": "UC_OskgZBoS4dAnVUg05Isog"},
+    {
+        "source_channel": "English with Jennifer",
+        "channel_id": "UCEKXieT70wByfvZwP1Cxd8w",
+    },
+    {"source_channel": "Rachel's English", "channel_id": "UCvn_XCl_mgQz3PrWSX85f6w"},
+    {
+        "source_channel": "Bob the Canadian",
+        "channel_id": "UCmW5tmKIUmryNfd5YtVw72A",
+    },
+    {
+        "source_channel": "Speak English With Vanessa",
+        "channel_id": "UC8pPD3E6KjKzJ_igPh_kyDg",
+    },
+    {"source_channel": "EnglishClass101", "channel_id": "UC969rtU7f_S8K3K64z_t48w"},
 ]
-
-
-def _source_channel_from_handle(handle: str) -> str:
-    return handle.lstrip("@").strip()
-
-
-def _resolve_channel_id_from_handle(handle: str) -> str:
-    h = handle.strip()
-    if not h.startswith("@"):  # allow raw handle
-        h = "@" + h
-
-    url = f"https://www.youtube.com/{h}"
-    res = requests.get(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
-        },
-        timeout=25,
-    )
-    if res.status_code != 200:
-        raise RuntimeError(f"failed to fetch channel page handle={handle} http={res.status_code}")
-
-    html = res.text
-    m = re.search(r"\"channelId\"\s*:\s*\"(UC[0-9A-Za-z_-]{20,})\"", html)
-    if not m:
-        raise RuntimeError(f"could not resolve channelId from handle={handle}")
-    return m.group(1)
 
 
 def _latest_video_urls_for_channel(channel_id: str, limit: int) -> list[str]:
@@ -116,11 +100,14 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     processed = 0
-    for handle in CHANNEL_HANDLES:
+    for cfg in CHANNEL_IDS:
+        source_channel = str(cfg.get("source_channel", "")).strip()
+        channel_id = str(cfg.get("channel_id", "")).strip()
+        if not source_channel or not channel_id:
+            raise RuntimeError("CHANNEL_IDS must include source_channel and channel_id")
+
         lang = "en"
-        channel_id = _resolve_channel_id_from_handle(handle)
         video_urls = _latest_video_urls_for_channel(channel_id, limit=max(1, per_channel))
-        source_channel = _source_channel_from_handle(handle)
 
         for url in video_urls:
             vid = _extract_video_id(url)
